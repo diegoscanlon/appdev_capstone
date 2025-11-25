@@ -1,0 +1,70 @@
+<article>
+  <header>
+    Unmatched Plans
+  </header>
+
+  <% all_plans = Plan.all %>
+  <% active_plans = all_plans.where({ :date => (Date.today...)}) %>
+  <% expired_plans = all_plans.where({ :date => (...Date.today)}) %>
+
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Going to</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Leaving from</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% active_plans.each do |plan| %>
+        <tr>
+          <td><%= plan.going_to %></td>
+          <td><%= plan.date.strftime("%b %e, %y") %></td>
+          <td><%= plan.time.strftime("%I:%M %p") %></td>
+          <td><%= plan.leaving_from %></td>
+          <td> <a href="/match">Match</a> </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  <p><a href="/plan"> Add your plan </a></p>
+
+  </div>
+</article>
+
+<article>
+  <header>
+    Expired Plans
+  </header>
+
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Going to</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Leaving from</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% expired_plans.each do |plan| %>
+        <tr>
+          <td><%= plan.going_to %></td>
+          <td><%= plan.date.strftime("%b %e, %y") %></td>
+          <td><%= plan.time.strftime("%I:%M %p") %></td>
+          <td><%= plan.leaving_from %></td>
+          <td> Expired </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</article>
